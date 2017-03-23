@@ -63,7 +63,11 @@ module Upmark
         title      = attributes[:title]
 
         if /^(?:http|mailto)/ =~ href
-          %Q{[#{text(element)}](#{href} "#{title}")}
+          if title.length == 0
+            %Q{[#{text(element)}](#{href})}
+          else
+            %Q{[#{text(element)}](#{href} "#{title}")}
+          end
         else
           text(element)
         end
